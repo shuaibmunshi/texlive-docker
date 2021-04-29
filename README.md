@@ -11,7 +11,7 @@ It can be used to compile the popular [deedy latex resume template](https://gith
 ## Usage
 
 ```
-docker run --rm -i --user="$(id -u):$(id -g)" --net=none -v "$PWD:/data" shuaibmunshi/resume
+docker run --rm -i --user="$(id -u):$(id -g)" --net=none -v "$PWD:/data" shuaibmunshi/texlive-docker
 xetex resume.tex
 ```
 
