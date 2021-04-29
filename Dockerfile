@@ -1,5 +1,5 @@
-# docker run --rm -i --user="$(id -u):$(id -g)" --net=none -v "$PWD:/data" shuaibmunshi/resume lualatex
-FROM debian:stretch-slim as installer
+# docker run --rm -i --user="$(id -u):$(id -g)" --net=none -v "$PWD:/data" shuaibmunshi/resume
+FROM debian:bullseye-slim as installer
 ARG DEBIAN_FRONTEND=noninteractive 
 
 RUN apt-get update && \
@@ -12,11 +12,16 @@ RUN apt-get update && \
         wget && \
     rm -rf /var/lib/apt/lists/*
 
-WORKDIR /install
+WORKDIR /data
 
 COPY texlive.profile /install/texlive.profile 
 
-RUN wget -qO- http://mirror.ctan.org/systems/texlive/tlnet/install-tl-unx.tar.gz | tar -xzf- --strip-components=1 && ./install-tl -profile texlive.profile
+RUN mkdir /install; \
+    cd /install; \
+    wget -qO- http://mirror.ctan.org/systems/texlive/tlnet/install-tl-unx.tar.gz | \
+    tar -xzf- --strip-components=1 && \
+    ./install-tl -profile texlive.profile && \
+    rm -r /install
 
 ENV HOME=/tmp PATH="/usr/local/texlive/2021/bin/x86_64-linux:$PATH"
 
