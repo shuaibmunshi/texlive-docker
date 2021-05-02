@@ -48,3 +48,4 @@ RUN tlmgr install \
 
 WORKDIR /data
 VOLUME ["/data"]
+ENTRYPOINT [ "xetex resume.tex" ]
