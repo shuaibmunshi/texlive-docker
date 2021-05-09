@@ -10,6 +10,7 @@ RUN apt-get update && \
         gnupg \
         ca-certificates \
         libfontconfig \
+        poppler-utils \
         wget && \
     rm -rf /var/lib/apt/lists/*
 
